@@ -6,7 +6,7 @@
   justify-content: center;
 }
 
-.NavTab__items {
+.NavTab__links {
   height: 100%;
   display: flex;
   justify-content: center;
@@ -16,7 +16,7 @@
   padding: 0;
 }
 
-.NavTab__item {
+.NavTab__link-item {
   margin-right: 40px;
 }
 
@@ -30,12 +30,12 @@
   border-bottom: 1px solid var(--light);
 }
 
-.NavTab__item:last-of-type {
+.NavTab__link-item:last-of-type {
   margin: 0;
 }
 
 @media (max-width: 414px) {
-  .NavTab__item {
+  .NavTab__link-item {
     margin-right: 24px;
   }
 

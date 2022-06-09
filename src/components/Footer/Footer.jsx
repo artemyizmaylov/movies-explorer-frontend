@@ -14,13 +14,13 @@ export default function Footer() {
           &copy; 2022
         </p>
         <nav>
-          <ul className="Footer__items">
-            <li className="Footer__item">
+          <ul className="Footer__links">
+            <li className="Footer__link-item">
               <a href="/" className="Footer__text Footer__text_color_white">
                 Яндекс.Практикум
               </a>
             </li>
-            <li className="Footer__item">
+            <li className="Footer__link-item">
               <a
                 href="/"
                 className="Footer__text Footer__text_color_white"
@@ -28,7 +28,7 @@ export default function Footer() {
                 Github
               </a>
             </li>
-            <li className="Footer__item">
+            <li className="Footer__link-item">
               <a
                 href="/"
                 className="Footer__text Footer__text_color_white"
