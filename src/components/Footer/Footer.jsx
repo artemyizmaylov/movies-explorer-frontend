@@ -4,34 +4,34 @@ import './Footer.css';
 export default function Footer() {
   return (
     <footer className="Footer">
-      <h3 className="footer__heading footer__text footer__text_color_grey">
+      <h3 className="Footer__heading Footer__text Footer__text_color_grey">
         Учебный проект Яндекс.Практикум х BeatFilm.
       </h3>
-      <section className="footer__nav-section">
+      <section className="Footer__section">
         <p
-          className="footer__text footer__copyrights"
+          className="Footer__text Footer__copyrights"
         >
           &copy; 2022
         </p>
         <nav>
-          <ul className="footer__links">
-            <li className="footer__link">
-              <a href="/" className="footer__text footer__text_color_white">
+          <ul className="Footer__items">
+            <li className="Footer__item">
+              <a href="/" className="Footer__text Footer__text_color_white">
                 Яндекс.Практикум
               </a>
             </li>
-            <li className="footer__link">
+            <li className="Footer__item">
               <a
                 href="/"
-                className="footer__text footer__text_color_white footer__link"
+                className="Footer__text Footer__text_color_white"
               >
                 Github
               </a>
             </li>
-            <li className="footer__link">
+            <li className="Footer__item">
               <a
                 href="/"
-                className="footer__text footer__text_color_white footer__link"
+                className="Footer__text Footer__text_color_white"
               >
                 Facebook
               </a>
