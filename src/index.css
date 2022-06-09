@@ -1,0 +1,12 @@
+@import url("./vendor/normalize.css");
+@import url("./vendor/fonts/fonts.css");
+
+html {
+  --dark-grey: #202020;
+  --light-grey: #8b8b8b;
+  --light: #ffffff;
+  --green: #3ddc84;
+  --blue: #4285f4;
+  --red: #ee3465;
+  background-color: var(--dark-grey);
+}
