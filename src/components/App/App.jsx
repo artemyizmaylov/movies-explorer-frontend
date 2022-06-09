@@ -1,15 +1,14 @@
 // TODO: delete test path
-
-import "./App.css";
-import { Routes, Route } from "react-router-dom";
-import AboutProject from "../AboutProject/AboutProject";
-import Movies from "../Movies/Movies";
-import SavedMovies from "../SavedMovies/SavedMovies";
-import Profile from "../Profile/Profile";
-import Login from "../Login/Login";
-import Register from "../Register/Register";
-import Logo from "../Logo/Logo";
-import Footer from "../Footer/Footer";
+import React from 'react';
+import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import AboutProject from '../AboutProject/AboutProject';
+import Movies from '../Movies/Movies';
+import SavedMovies from '../SavedMovies/SavedMovies';
+import Profile from '../Profile/Profile';
+import Login from '../Login/Login';
+import Register from '../Register/Register';
+import Footer from '../Footer/Footer';
 
 export default function App() {
   return (
