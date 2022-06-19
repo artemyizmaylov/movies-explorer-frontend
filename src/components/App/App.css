@@ -1,6 +1,3 @@
-/* TODO: delete height rule */
-
-.App {
-  height: 100vh;
-  width: 100vw;
+.app {
+  background-color: #202020;
 }
