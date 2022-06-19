@@ -1,0 +1,36 @@
+.promo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #073042;
+  background-image: url("../../images/bg-logo.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 320px;
+  grid-area: promo;
+}
+
+.promo__heading {
+  font-family: "Inter";
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  text-align: center;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  margin: 0;
+  max-width: 730px;
+  padding: 0 10px;
+}
+
+@media (max-width: 700px) {
+  .promo {
+    background-size: 248px;
+  }
+
+  .promo__heading {
+    font-size: 31px;
+    line-height: 39px;
+    max-width: 500px;
+  }
+}

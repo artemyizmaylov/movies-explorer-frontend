@@ -1,0 +1,137 @@
+.about-project {
+  background-color: #202020;
+  padding: 0 70px;
+  display: grid;
+  grid-template-rows: 50px repeat(2, min-content);
+  grid-template-columns: repeat(2, 1fr);
+  gap: 70px 40px;
+  align-content: center;
+  grid-area: about-project;
+}
+
+.about-project__section {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+}
+
+.about-project__text {
+  display: block;
+  color: #ffffff;
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: left;
+  margin: 0;
+}
+
+.about-project__text_color_grey {
+  color: #8b8b8b;
+}
+
+.about-project__heading {
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+  border-bottom: 1px solid #dadada;
+  grid-column: span 2;
+}
+
+.about-project__subheading {
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.04em;
+  margin-bottom: 26px;
+}
+
+.about-project__table {
+  grid-column: span 2;
+  margin-top: 40px;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+}
+
+.table__row {
+  display: flex;
+  align-items: center;
+}
+
+.table__data {
+  flex-grow: 5;
+  text-align: center;
+  line-height: 17px;
+  padding: 9px 0;
+}
+
+.table__data:first-of-type {
+  flex-grow: 1;
+}
+
+.table__data_color_green {
+  color: #000000;
+  background-color: #3ddc84;
+}
+
+.table__data_color_grey {
+  background-color: #303030;
+}
+
+@media (max-width: 768px) {
+  .about-project {
+    padding: 0 50px;
+    gap: 70px 30px;
+  }
+
+  .about-project__subheading {
+    margin-bottom: 22px;
+  }
+
+  .about-project__table {
+    margin-top: 23px;
+  }
+
+  .about-project__text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+@media (max-width: 414px) {
+  .about-project {
+    padding: 0 18px;
+    gap: 60px;
+  }
+
+  .about-project__section {
+    grid-column: span 2;
+  }
+
+  .about-project__text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about-project__heading {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .about-project__subheading {
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 16px;
+  }
+
+  .about-project__table {
+    margin: 0;
+  }
+
+  .table__data {
+    flex-grow: 3;
+  }
+}
