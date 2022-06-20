@@ -1,0 +1,73 @@
+.movies-card {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 1fr min-content;
+  grid-auto-rows: minmax(min-content, max-content);
+  box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  background: #222222;
+}
+
+.movies-card__info {
+  display: grid;
+  grid-template-columns: 1fr min-content;
+  grid-template-rows: repeat(2, min-content);
+  grid-template-areas:
+    "heading button"
+    "duration button";
+  row-gap: 10px;
+  padding: 14px 12px;
+}
+
+.movies-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.movies-card__text {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  color: #8b8b8b;
+  margin: 0;
+}
+
+.movies-card__heading {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  color: #ffffff;
+  grid-area: heading;
+}
+
+.movies-card__duration {
+  grid-area: duration;
+}
+
+.movies-card__button {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  box-sizing: border-box;
+  grid-area: button;
+}
+
+.movies-card__save-button {
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.09);
+}
+
+.movies-card__save-button_active {
+  background-color: #2be080;
+}
+
+.movies-card__delete-button {
+  background-image: url("../../images/x-button.svg");
+  background-size: contain;
+}

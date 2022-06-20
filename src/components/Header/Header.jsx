@@ -1,22 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Header.css';
-import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Logo from '../Logo/Logo';
+import UnauthLinks from '../UnauthLinks/UnauthLinks';
+import Navigation from '../Navigation/Navigation';
 
 export default function Header() {
+  const [loggedIn, setLoggedIn] = useState(true);
+  const [bgColor, setBgColor] = useState({ background: 'transperent' });
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === '/') {
+      setBgColor({ background: '#073042' });
+    }
+  }, [location]);
+
+  const handleLoggin = () => {
+    setLoggedIn(!loggedIn);
+  };
+
   return (
-    <header className="header">
+    <header className="header" style={bgColor}>
       <Logo />
-      <nav>
-        <ul className="header__links">
-          <li className="header__link-item">
-            <Link to="/signup" className="header__link">Регистрация</Link>
-          </li>
-          <li className="header__link-item header__link-item_color_green">
-            <Link to="/signin" className="header__link">Войти</Link>
-          </li>
-        </ul>
-      </nav>
+      {loggedIn ? <Navigation onClick={handleLoggin} /> : <UnauthLinks onClick={handleLoggin} />}
     </header>
   );
 }
