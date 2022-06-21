@@ -18,10 +18,24 @@ export default function MyCard() {
       </p>
       <ul className="my-card__links">
         <li className="my-card__link-item">
-          <a className="my-card__link my-card__text" href="/">Facebook</a>
+          <a
+            className="my-card__link my-card__text"
+            href="https://vk.com/artemyizmaylov"
+            target="_blank"
+            rel="noreferrer"
+          >
+            ВКонтакте
+          </a>
         </li>
         <li className="my-card__link-item">
-          <a className="my-card__link my-card__text" href="/">Github</a>
+          <a
+            className="my-card__link my-card__text"
+            href="https://github.com/artemyizmaylov"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Github
+          </a>
         </li>
       </ul>
     </section>

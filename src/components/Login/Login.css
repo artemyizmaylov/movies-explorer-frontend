@@ -33,11 +33,22 @@
   font-weight: 500;
   background-color: #4285f4;
   border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.login__submit-button:hover {
+  opacity: 60%;
 }
 
 .login__link {
   text-decoration: none;
   color: #4285f4;
+  transition: 0.2s;
+}
+
+.login__link:hover {
+  opacity: 60%;
 }
 
 .login__question {

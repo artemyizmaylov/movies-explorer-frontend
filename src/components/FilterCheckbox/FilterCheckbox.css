@@ -1,5 +1,6 @@
 .filter-checkbox {
   display: flex;
+  cursor: pointer;
 }
 
 .filter-checkbox__switch {

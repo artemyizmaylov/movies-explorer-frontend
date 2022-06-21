@@ -30,7 +30,13 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 15px;
+  cursor: pointer;
+  transition: 0.2s;
   color: #ffffff;
+}
+
+.movies-card-list__more-button:hover {
+  opacity: 60%;
 }
 
 @media (max-width: 768px) {

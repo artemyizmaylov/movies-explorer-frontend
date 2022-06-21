@@ -27,6 +27,11 @@
   font-size: 12px;
   line-height: 16px;
   text-decoration: none;
+  transition: 0.2s;
+}
+
+.unauth-links__link:hover {
+  opacity: 60%;
 }
 
 .unauth-links__link-item_color_green > .unauth-links__link {

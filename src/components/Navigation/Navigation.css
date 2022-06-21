@@ -27,6 +27,11 @@
   line-height: 18px;
   color: #ffffff;
   text-decoration: none;
+  transition: 0.2s;
+}
+
+.navigation__link:hover {
+  opacity: 60%;
 }
 
 .navigation__link_hidden {
@@ -72,6 +77,11 @@
   display: flex;
   align-items: center;
   gap: 17px;
+  transition: 0.2s;
+}
+
+.account__link:hover {
+  opacity: 60%;
 }
 
 .account__link_marked {

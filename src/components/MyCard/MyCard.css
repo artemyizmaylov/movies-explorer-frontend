@@ -64,6 +64,11 @@
   font-weight: 500;
   line-height: 17px;
   text-decoration: none;
+  transition: 0.2s;
+}
+
+.my-card__link:hover {
+  opacity: 60%;
 }
 
 @media (max-width: 800px) {

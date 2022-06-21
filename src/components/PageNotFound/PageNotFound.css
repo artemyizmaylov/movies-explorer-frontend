@@ -35,6 +35,11 @@
   position: absolute;
   bottom: 60px;
   margin: 0;
+  transition: 0.2s;
+}
+
+.page-not-found__back-button:hover {
+  opacity: 60%;
 }
 
 @media (max-width: 768px) {

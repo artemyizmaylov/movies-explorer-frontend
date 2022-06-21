@@ -57,6 +57,14 @@
   margin: 0;
 }
 
+.footer__link {
+  transition: 0.2s;
+}
+
+.footer__link:hover {
+  opacity: 60%;
+}
+
 /* Media queries */
 @media (max-width: 768px) {
   .footer {
