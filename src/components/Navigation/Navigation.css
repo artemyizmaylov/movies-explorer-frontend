@@ -54,7 +54,7 @@
   background-image: url("../../images/x-button.svg");
   display: none;
   justify-self: flex-end;
-  margin: 22px;
+  margin: 25px;
 }
 
 .account {
@@ -100,11 +100,10 @@
 
   .navigation__links {
     display: grid;
-    grid-template-rows: 100px repeat(2, min-content) 1fr;
+    grid-template-rows: 155px repeat(2, min-content) 1fr;
     justify-items: center;
     align-items: flex-start;
-    gap: 28px;
-
+    gap: 0;
     position: fixed;
     top: 0;
     right: 0;
@@ -118,6 +117,10 @@
 
   .navigation__links_opened {
     width: 520px;
+  }
+
+  .navigation__link-item {
+    margin-bottom: 18px;
   }
 
   .navigation__link {
@@ -138,21 +141,23 @@
 
   .account {
     margin-left: 0;
-    margin-bottom: 99px;
+    margin-bottom: 90px;
   }
 }
 
 @media (max-width: 414px) {
   .navigation__links {
-    gap: 24px;
+    grid-template-rows: 145px repeat(2, min-content) 1fr;
+    gap: 0;
   }
 
   .navigation__link-item {
     height: 26px;
+    margin-bottom: 20px;
   }
 
   .navigation__close-button {
-    margin: 14px;
+    margin: 16px;
   }
 
   .account {

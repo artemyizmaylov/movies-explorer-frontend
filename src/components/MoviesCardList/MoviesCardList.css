@@ -8,7 +8,7 @@
   padding: 0;
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
   gap: 32px 20px;
 }
 
@@ -35,7 +35,7 @@
 
 @media (max-width: 768px) {
   .movies-card-list {
-    padding: 80px 30px;
+    padding: 80px 30px 35px 30px;
   }
 
   .movies-card-list__movies-container {

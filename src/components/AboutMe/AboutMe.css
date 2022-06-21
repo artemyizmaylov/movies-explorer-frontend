@@ -36,14 +36,15 @@
 @media (max-width: 585px) {
   .about-me {
     padding: 0 14px;
-    gap: 60px;
-    justify-content: start;
+    gap: 50px;
+    align-items: center;
   }
 
   .about-me__heading {
     font-size: 18px;
     line-height: 22px;
-    margin-top: 70px;
+    margin-top: 20px;
+    min-width: 100%;
   }
 
   .about-me__content {
