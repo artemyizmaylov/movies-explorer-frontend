@@ -1,0 +1,37 @@
+.main {
+  display: grid;
+  grid-template:
+    "header" 74px
+    "promo" 524px
+    "nav-tab" 66px
+    "about-project" 610px
+    "techs" 625px
+    "about-me" 1060px
+    "footer" 172px / 100%;
+}
+
+@media (max-width: 800px) {
+  .main {
+    grid-template:
+      "header" 74px
+      "promo" 784px
+      "nav-tab" 66px
+      "about-project" 586px
+      "techs" 567px
+      "about-me" 994px
+      "footer" 172px / 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .main {
+    grid-template:
+      "header" 74px
+      "promo" 570px
+      "nav-tab" 66px
+      "about-project" 641px
+      "techs" 651px
+      "about-me" 1198px
+      "footer" 270px / 100%;
+  }
+}
