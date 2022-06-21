@@ -5,8 +5,9 @@
   background-color: #073042;
   background-image: url("../../images/bg-logo.svg");
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: 50% calc(50% - 20px);
   background-size: 320px;
+  padding-bottom: 40px;
   grid-area: promo;
 }
 
@@ -23,11 +24,19 @@
   padding: 0 10px;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .promo {
-    background-size: 248px;
+    padding-bottom: 15px;
+    background-position: 50% calc(50% - 10px);
   }
+}
 
+@media (max-width: 414px) {
+  .promo {
+    padding-bottom: 40px;
+    background-size: 248px;
+    background-position: 50% calc(50% - 20px);
+  }
   .promo__heading {
     font-size: 31px;
     line-height: 39px;

@@ -1,0 +1,137 @@
+.my-card {
+  height: 327px;
+  display: grid;
+  grid-template-areas:
+    "heading photo"
+    "subheading photo"
+    "info photo"
+    "links photo";
+  grid-template-rows: repeat(2, min-content) 1fr min-content;
+  grid-template-columns: minmax(min-content, 600px);
+  gap: 18px;
+}
+
+.my-card__text {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: #ffffff;
+  margin: 0;
+}
+
+.my-card__heading {
+  font-size: 50px;
+  line-height: 58px;
+  letter-spacing: -0.04em;
+  grid-area: heading;
+}
+
+.my-card__subheading {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  grid-area: subheading;
+}
+
+.my-card__info {
+  grid-area: info;
+  margin-top: 8px;
+}
+
+.my-card__photo {
+  width: 270px;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  justify-self: flex-end;
+  grid-area: photo;
+}
+
+.my-card__links {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+  grid-area: links;
+}
+
+.my-card__link-item {
+  list-style: none;
+}
+
+.my-card__link {
+  font-weight: 500;
+  line-height: 17px;
+  text-decoration: none;
+}
+
+@media (max-width: 800px) {
+  .my-card {
+    height: 307px;
+    gap: 16px;
+  }
+
+  .my-card__text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .my-card__heading {
+    font-size: 40px;
+    line-height: 40px;
+  }
+
+  .my-card__info {
+    margin-top: 4px;
+  }
+
+  .my-card__link {
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .my-card__photo {
+    width: 255px;
+  }
+}
+
+@media (max-width: 585px) {
+  .my-card {
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .my-card__photo {
+    width: 292px;
+    height: 357px;
+    margin-bottom: 20px;
+  }
+
+  .my-card__text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .my-card__heading {
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .my-card__links {
+    margin-top: 20px;
+    gap: 26px;
+  }
+
+  .my-card__link {
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .my-card__info {
+    margin: 0;
+  }
+}

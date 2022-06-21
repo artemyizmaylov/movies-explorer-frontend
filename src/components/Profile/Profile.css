@@ -1,18 +1,17 @@
 .profile {
   height: 100vh;
   display: grid;
-  grid-template: "header" 74px "content" 1fr / 100%;
+  grid-template:
+    "header" 74px
+    "info" 1fr / 100%;
 }
 
 .profile__content {
-  min-width: 410px;
-  min-height: 482px;
-  justify-self: center;
-  align-self: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  grid-template-rows: 152px repeat(2, 1fr);
+  grid-template-columns: 410px;
+  margin: 74px auto 70px auto;
+  grid-area: info;
 }
 
 .profile__text {
@@ -35,12 +34,12 @@
 .profile__heading {
   font-size: 24px;
   line-height: 29px;
+  text-align: center;
 }
 
 .profile__info {
   margin: 0;
   padding: 0;
-  min-width: 100%;
 }
 
 .profile__info-item {
@@ -62,11 +61,12 @@
   list-style: none;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   align-items: center;
+  gap: 12px;
 }
 
 .profile__button-item {
-  margin-bottom: 16px;
 }
 
 .profile__button-item:last-of-type {
@@ -77,6 +77,8 @@
   border: none;
   background: none;
   padding: 0;
+  font-size: 13px;
+  line-height: 16px;
 }
 
 @media (max-width: 768px) {

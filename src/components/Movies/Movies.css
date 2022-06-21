@@ -1,0 +1,8 @@
+.movies {
+  display: grid;
+  grid-template:
+    "header" 72px
+    "search" 212px
+    "movies" 1fr
+    "footer" 172px / 100%;
+}

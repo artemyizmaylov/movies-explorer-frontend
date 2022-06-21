@@ -52,8 +52,8 @@
 }
 
 .table {
-  display: flex;
-  flex-direction: column;
+  display: inline-block;
+  width: 100%;
 }
 
 .table__row {
@@ -62,23 +62,36 @@
 }
 
 .table__data {
-  flex-grow: 5;
-  text-align: center;
+  font-family: "Inter";
+  font-weight: 500;
+  font-size: 14px;
   line-height: 17px;
-  padding: 9px 0;
+  text-align: center;
+  color: #8b8b8b;
+  text-align: center;
+  flex-grow: 5;
 }
 
 .table__data:first-of-type {
   flex-grow: 1;
 }
 
+.table__data_bottom {
+  margin-top: 14px;
+}
+
 .table__data_color_green {
   color: #000000;
   background-color: #3ddc84;
+  padding: 9px 0;
+  font-weight: 400;
 }
 
 .table__data_color_grey {
+  color: #ffffff;
   background-color: #303030;
+  padding: 9px 0;
+  font-weight: 400;
 }
 
 @media (max-width: 768px) {
@@ -87,17 +100,28 @@
     gap: 70px 30px;
   }
 
+  .about-project__text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-project__heading {
+    font-size: 22px;
+    line-height: 27px;
+  }
+
   .about-project__subheading {
     margin-bottom: 22px;
+    font-size: 20px;
+    line-height: 24px;
   }
 
   .about-project__table {
     margin-top: 23px;
   }
 
-  .about-project__text {
-    font-size: 12px;
-    line-height: 18px;
+  .table__data {
+    flex-grow: 6;
   }
 }
 
@@ -132,6 +156,20 @@
   }
 
   .table__data {
+    font-size: 11px;
+    line-height: 13px;
     flex-grow: 3;
+  }
+
+  .table__data_color_green {
+    padding: 11px 0;
+  }
+
+  .table__data_color_grey {
+    padding: 11px 0;
+  }
+
+  .table__data_bottom {
+    margin-top: 10px;
   }
 }

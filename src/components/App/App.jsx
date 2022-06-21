@@ -10,7 +10,7 @@ import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
-import TEST from '../MoviesCardList/MoviesCardList';
+import TEST from '../Preloader/Preloader';
 
 export default function App() {
   return (

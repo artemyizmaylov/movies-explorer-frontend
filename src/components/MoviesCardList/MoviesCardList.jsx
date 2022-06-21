@@ -9,9 +9,6 @@ export default function MoviesCardList() {
         <MoviesCard />
         <MoviesCard />
         <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
       </ul>
       <div className="movies-card-list__button-container">
         <button className="movies-card-list__more-button" type="button">Ещё</button>

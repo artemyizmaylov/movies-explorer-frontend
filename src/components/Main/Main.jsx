@@ -11,7 +11,7 @@ import Footer from '../Footer/Footer';
 
 export default function Main() {
   return (
-    <main className="main">
+    <div className="main">
       <Header />
       <Promo />
       <NavTab />
@@ -19,6 +19,6 @@ export default function Main() {
       <Techs />
       <AboutMe />
       <Footer />
-    </main>
+    </div>
   );
 }

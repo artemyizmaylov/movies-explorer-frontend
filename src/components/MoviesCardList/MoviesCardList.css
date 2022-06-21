@@ -1,6 +1,6 @@
 .movies-card-list {
-  padding: 70px;
-  padding-bottom: 30px;
+  padding: 80px 70px 35px 70px;
+  grid-area: movies;
 }
 
 .movies-card-list__movies-container {
@@ -16,13 +16,13 @@
   height: 166px;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: flex-end;
 }
 
 .movies-card-list__more-button {
   width: 320px;
   height: 36px;
-  margin-top: 50px;
+  margin-bottom: 50px;
   background: none;
   border: 1px solid #424242;
   border-radius: 5px;

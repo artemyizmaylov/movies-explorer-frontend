@@ -22,12 +22,12 @@ export default function AboutProject() {
       <table className="about-project__table">
         <tbody className="table">
           <tr className="table__row">
-            <td className="table__data table__data_color_green about-project__text">1 неделя</td>
-            <td className="table__data table__data_color_grey about-project__text">4 недели</td>
+            <td className="table__data table__data_color_green">1 неделя</td>
+            <td className="table__data table__data_color_grey">4 недели</td>
           </tr>
           <tr className="table__row">
-            <td className="table__data about-project__text about-project__text_color_grey">Back-end</td>
-            <td className="table__data about-project__text about-project__text_color_grey">Front-end</td>
+            <td className="table__data table__data_bottom">Back-end</td>
+            <td className="table__data table__data_bottom">Front-end</td>
           </tr>
         </tbody>
       </table>

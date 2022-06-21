@@ -14,17 +14,14 @@ export default function Header() {
   useEffect(() => {
     if (location.pathname === '/') {
       setBgColor({ background: '#073042' });
+      setLoggedIn(false);
     }
   }, [location]);
-
-  const handleLoggin = () => {
-    setLoggedIn(!loggedIn);
-  };
 
   return (
     <header className="header" style={bgColor}>
       <Logo />
-      {loggedIn ? <Navigation onClick={handleLoggin} /> : <UnauthLinks onClick={handleLoggin} />}
+      {loggedIn ? <Navigation /> : <UnauthLinks />}
     </header>
   );
 }

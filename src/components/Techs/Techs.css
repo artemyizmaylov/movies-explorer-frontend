@@ -36,7 +36,7 @@
 }
 
 .techs__section {
-  max-width: 450px;
+  max-width: 460px;
   margin: 0 auto;
 }
 
@@ -45,8 +45,8 @@
   margin: 10px 0 0 0;
   padding: 0;
   display: grid;
-  grid-auto-rows: 60px;
   grid-template-columns: repeat(auto-fit, 90px);
+  grid-auto-rows: 60px;
   gap: 10px;
   justify-content: center;
   justify-self: center;
@@ -69,6 +69,10 @@
     gap: 80px;
   }
 
+  .techs__subheading {
+    margin-bottom: 22px;
+  }
+
   .techs__paragraph {
     font-size: 12px;
     line-height: 18px;
@@ -77,7 +81,7 @@
   .techs__cards {
     margin-top: 3px;
     grid-template-columns: repeat(auto-fit, 84px);
-    grid-template-rows: 57px;
+    grid-auto-rows: 57px;
   }
 }
 

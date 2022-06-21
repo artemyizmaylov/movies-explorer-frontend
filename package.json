@@ -13,6 +13,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "scp -r ./build/* artemyizmaylov@51.250.70.110:/home/artemyizmaylov/movies-explorer-frontend",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
