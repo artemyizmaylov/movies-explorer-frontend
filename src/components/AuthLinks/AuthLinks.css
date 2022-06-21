@@ -16,7 +16,7 @@
 }
 
 .auth-links__link {
-  font-family: "Inter", sans-serif;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 18px;
@@ -29,7 +29,7 @@
 }
 
 .account__link {
-  font-family: "Inter", sans-serif;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;

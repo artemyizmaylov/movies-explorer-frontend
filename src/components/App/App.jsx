@@ -1,5 +1,3 @@
-// TODO: delete test path
-
 import React from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
@@ -10,7 +8,6 @@ import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
-import TEST from '../Preloader/Preloader';
 
 export default function App() {
   return (
@@ -22,9 +19,6 @@ export default function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/signin" element={<Login />} />
-
-        <Route path="/TEST" element={<TEST />} />
-
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </div>

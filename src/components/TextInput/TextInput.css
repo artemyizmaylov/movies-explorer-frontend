@@ -6,7 +6,7 @@
 }
 
 .text-input__text {
-  font-family: "Inter", sans-serif;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-size: 10px;
   line-height: 12px;
@@ -28,4 +28,6 @@
 
 .text-input__error {
   color: #ee3465;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

@@ -1,5 +1,3 @@
-// TODO: fix year of birth, write biography
-
 import React from 'react';
 import './AboutMe.css';
 import Portfolio from '../Portfolio/Portfolio';

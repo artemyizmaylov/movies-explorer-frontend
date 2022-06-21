@@ -8,7 +8,7 @@
 }
 
 .page-not-found__text {
-  font-family: "Inter";
+  font-family: Inter, Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
