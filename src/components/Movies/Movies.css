@@ -4,7 +4,7 @@
   grid-template:
     "header" 72px
     "search" min-content
-    "movies" 1fr
+    "movies" min-content
     "footer" 172px / 100%;
   min-height: 100vh;
 }
@@ -14,7 +14,7 @@
     grid-template:
       "header" 72px
       "search" min-content
-      "movies" 1fr
+      "movies" min-content
       "footer" 272px / 100%;
     min-height: 1316px;
   }
