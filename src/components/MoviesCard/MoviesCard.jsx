@@ -7,29 +7,27 @@ import { defaultMessage, noConnectionMessage } from '../../utils/constants';
 
 export default function MoviesCard({ movie }) {
   const [saved, setSaved] = useState(false);
-  const [mainId, setMainId] = useState(movie._id);
   const location = useLocation();
 
   const { setTooltipMessage } = useContext(TooltipContext);
 
-  const handleSetSaved = () => {
-    const newMovie = {};
-    const { image, id } = movie;
-
-    Object.assign(newMovie, movie);
-
-    delete newMovie.id;
-    delete newMovie.created_at;
-    delete newMovie.updated_at;
-
-    //  Фильтр для заполнения отсутствующих значений в ответе от сервера фильмов
-    Object.entries(newMovie).forEach((key) => {
-      if (!key[1]) {
-        newMovie[key[0]] = '...';
-      }
-    });
-
+  const handleSetSaved = (evt) => {
     if (!saved) {
+      const newMovie = {};
+      const { image, id } = movie;
+
+      Object.assign(newMovie, movie);
+
+      delete newMovie.id;
+      delete newMovie.created_at;
+      delete newMovie.updated_at;
+
+      //  Фильтр для заполнения отсутствующих значений в ответе от сервера фильмов
+      Object.entries(newMovie).forEach((key) => {
+        if (!key[1]) {
+          newMovie[key[0]] = '...';
+        }
+      });
       mainApi.saveFilm({
         ...newMovie,
         image: `https://api.nomoreparties.co/${image.url}`,
@@ -38,8 +36,6 @@ export default function MoviesCard({ movie }) {
       })
         .then((savedMovie) => {
           setSaved(true);
-          setMainId(savedMovie._id);
-
           let savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
 
           if (!savedMovies) {
@@ -57,47 +53,28 @@ export default function MoviesCard({ movie }) {
           }
         });
     } else {
-      mainApi.deleteFilm(mainId)
-        .then((res) => {
+      mainApi.deleteFilm(movie._id)
+        .then(() => {
           setSaved(false);
-          setMainId(movie._id);
-
           const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
-          const index = savedMovies.forEach((film, i) => {
-            if (film._id === res._id) {
-              return i;
-            }
-            return null;
-          });
 
-          savedMovies.pop(index);
+          let index = 0;
+          for (let i = 0; i < savedMovies.length; i += 1) {
+            const film = savedMovies[i];
+            if (film._id === movie._id) {
+              index = i;
+            }
+          }
+
+          savedMovies.splice(index, 1);
           localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+
+          if (location.pathname === '/saved-movies') {
+            evt.target.closest('.movies-card').remove();
+          }
         })
         .catch(() => setTooltipMessage(noConnectionMessage));
     }
-  };
-
-  const handleDelete = (evt) => {
-    mainApi.deleteFilm(movie._id)
-      .then((res) => {
-        if (location.pathname === '/saved-movies') {
-          evt.target.closest('.movies-card').remove();
-        }
-
-        setSaved(false);
-
-        const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
-        const index = savedMovies.forEach((film, i) => {
-          if (film._id === res._id) {
-            return i;
-          }
-          return null;
-        });
-
-        savedMovies.pop(index);
-        localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
-      })
-      .catch(() => setTooltipMessage(noConnectionMessage));
   };
 
   useEffect(() => {
@@ -105,9 +82,8 @@ export default function MoviesCard({ movie }) {
 
     if (savedMovies) {
       savedMovies.forEach((savedMovie) => {
-        if (savedMovie.movieId === movie.id) {
+        if ((savedMovie.movieId === movie.id) || (savedMovie._id, movie._id)) {
           setSaved(true);
-          setMainId(savedMovie._id);
         }
       });
     }
@@ -141,7 +117,7 @@ export default function MoviesCard({ movie }) {
             className="movies-card__button movies-card__delete-button"
             type="button"
             aria-label="Сохранить"
-            onClick={handleDelete}
+            onClick={handleSetSaved}
           />
         )}
       </div>
