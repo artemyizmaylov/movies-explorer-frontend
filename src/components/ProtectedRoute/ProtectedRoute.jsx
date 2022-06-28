@@ -1,11 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Navigate } from 'react-router-dom';
-import UserContext from '../../context/UserContext';
 
-export default function ProtectedRoute({ children }) {
-  const { currentUser } = useContext(UserContext);
-
-  if (currentUser._id) {
+export default function ProtectedRoute({ children, allowed }) {
+  if (allowed) {
     return children;
   }
   return <Navigate to="/" />;

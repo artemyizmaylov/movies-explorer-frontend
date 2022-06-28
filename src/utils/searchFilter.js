@@ -1,13 +1,9 @@
-function getShorts(array) {
-  return array.filter((element) => element.duration <= 40);
-}
+export default function searchFilter(array, query, short) {
+  const filtered = array.filter((element) => element.nameRU.includes(query));
 
-export default function searchFilter(array, query, isShort) {
-  let newArray = array;
-
-  if (isShort) {
-    newArray = getShorts(array);
+  if (short) {
+    return filtered.filter((element) => element.duration <= 40);
   }
 
-  return newArray.filter((element) => element.nameRU.includes(query));
+  return filtered;
 }

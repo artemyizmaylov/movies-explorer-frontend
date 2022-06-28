@@ -1,7 +1,7 @@
 import React from 'react';
 import './FilterCheckbox.css';
 
-export default function FilterCheckbox({ value, handler }) {
+export default function FilterCheckbox({ value, onChange }) {
   return (
     <label className="filter-checkbox" htmlFor="shorts">
       <input
@@ -10,7 +10,7 @@ export default function FilterCheckbox({ value, handler }) {
         name="shorts"
         id="shorts"
         checked={value}
-        onChange={handler}
+        onChange={onChange}
       />
       <div className="filter-checkbox__switch">
         <div className="filter-checkbox__switch-slider" />

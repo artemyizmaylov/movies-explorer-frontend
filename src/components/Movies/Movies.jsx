@@ -10,7 +10,7 @@ import mainApi from '../../utils/MainApi';
 import searchFilter from '../../utils/searchFilter';
 
 export default function Movies() {
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState(JSON.parse(localStorage.getItem('movies')) || []);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -18,37 +18,46 @@ export default function Movies() {
   Возможно, проблема с соединением или сервер недоступен.
   Подождите немного и попробуйте ещё раз`;
 
+  const filter = (query, isShort) => {
+    const storedMovies = JSON.parse(localStorage.getItem('movies'));
+
+    const filtered = searchFilter(storedMovies, query, isShort);
+    if (filtered.length === 0) {
+      setErrorMessage('Ничего не найдено');
+      return;
+    }
+
+    setMovies(filtered);
+  };
+
   const handleSearch = (query, isShort) => {
     setLoading(true);
     setErrorMessage('');
 
-    getFilms()
-      .then((films) => {
-        const filtered = searchFilter(films, query, isShort);
-        setMovies(filtered);
+    const storedMovies = JSON.parse(localStorage.getItem('movies'));
 
-        if (filtered.length === 0) {
-          setErrorMessage('Ничего не найдено');
-        }
+    if (!storedMovies) {
+      getFilms()
+        .then((films) => {
+          localStorage.setItem('movies', JSON.stringify(films));
+          filter(query, isShort);
+        })
+        .catch(() => setErrorMessage(message));
+    } else {
+      filter(query, isShort);
+    }
 
-        localStorage.setItem('movies', JSON.stringify(filtered));
-      })
-      .catch(() => setErrorMessage(message))
-      .finally(() => setLoading(false));
+    setLoading(false);
   };
 
   useEffect(() => {
-    mainApi.getFilms().then((films) => {
-      if (films.length > 0) {
-        localStorage.setItem('savedMovies', JSON.stringify(films));
-      }
-    });
-
-    const storedMovies = JSON.parse(localStorage.getItem('movies'));
-
-    if (storedMovies) {
-      setMovies(storedMovies);
-    }
+    mainApi.getFilms()
+      .then((films) => {
+        if (films.length > 0) {
+          localStorage.setItem('savedMovies', JSON.stringify(films));
+        }
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   return (

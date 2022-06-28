@@ -20,8 +20,13 @@ export default function Register() {
     mainApi.register(form.values)
       .then((user) => mainApi.login({ email: user.email, password: form.values.password }))
       .then(() => mainApi.getUser())
-      .then((user) => setCurrentUser(user))
-      .then(() => navigate('/movies'))
+      .then((user) => {
+        localStorage.setItem('loggedIn', true);
+        localStorage.setItem('userId', user._id);
+
+        setCurrentUser(user);
+        navigate('/movies');
+      })
       .catch((err) => err.json().then((data) => setRegisterError(data.message)));
   };
 

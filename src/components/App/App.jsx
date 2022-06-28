@@ -12,16 +12,20 @@ import UserContext from '../../context/UserContext';
 import mainApi from '../../utils/MainApi';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
-// TODO: настроить валидацию форм
-
 export default function App() {
+  const loggedIn = JSON.parse(localStorage.getItem('loggedIn')) || false;
   const [currentUser, setCurrentUser] = useState({});
   const userContext = useMemo(() => ({ currentUser, setCurrentUser }), [currentUser]);
 
   useEffect(() => {
-    mainApi.getUser()
-      .then((user) => setCurrentUser(user))
-      .catch((err) => err.json().then((res) => console.log(res.message)));
+    if (loggedIn) {
+      mainApi.getUser()
+        .then((user) => {
+          localStorage.setItem('userId', user._id);
+          setCurrentUser(user);
+        })
+        .catch((err) => console.log(err));
+    }
   }, []);
 
   return (
@@ -29,11 +33,26 @@ export default function App() {
       <UserContext.Provider value={userContext}>
         <Routes>
           <Route exact path="/" element={<Main />} />
-          <Route path="/signup" element={<Register />} />
-          <Route path="/signin" element={<Login />} />
-          <Route path="/movies" element={<ProtectedRoute><Movies /></ProtectedRoute>} />
-          <Route path="/saved-movies" element={<ProtectedRoute><SavedMovies /></ProtectedRoute>} />
-          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+          <Route
+            path="/movies"
+            element={<ProtectedRoute allowed={loggedIn}><Movies /></ProtectedRoute>}
+          />
+          <Route
+            path="/saved-movies"
+            element={<ProtectedRoute allowed={loggedIn}><SavedMovies /></ProtectedRoute>}
+          />
+          <Route
+            path="/profile"
+            element={<ProtectedRoute allowed={loggedIn}><Profile /></ProtectedRoute>}
+          />
+          <Route
+            path="/signup"
+            element={<ProtectedRoute allowed={!loggedIn}><Register /></ProtectedRoute>}
+          />
+          <Route
+            path="/signin"
+            element={<ProtectedRoute allowed={!loggedIn}><Login /></ProtectedRoute>}
+          />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </UserContext.Provider>

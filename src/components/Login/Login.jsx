@@ -19,8 +19,13 @@ export default function Login() {
 
     mainApi.login(form.values)
       .then(() => mainApi.getUser())
-      .then((user) => setCurrentUser(user))
-      .then(() => navigate('/movies'))
+      .then((user) => {
+        localStorage.setItem('loggedIn', true);
+        localStorage.setItem('userId', user._id);
+
+        setCurrentUser(user);
+        navigate('/movies');
+      })
       .catch((err) => err.json().then((data) => setLoginError(data.message)));
   };
 

@@ -49,7 +49,7 @@ export default function MoviesCard({ movie }) {
           savedMovies.push(savedMovie);
           localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
         })
-        .catch((err) => err.json().then(() => console.log(err)));
+        .catch((err) => console.log(err));
     } else {
       mainApi.deleteFilm(mainId)
         .then((res) => {
@@ -66,7 +66,8 @@ export default function MoviesCard({ movie }) {
 
           savedMovies.pop(index);
           localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
-        });
+        })
+        .catch((err) => console.log(err));
     }
   };
 
@@ -89,7 +90,8 @@ export default function MoviesCard({ movie }) {
 
         savedMovies.pop(index);
         localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
-      });
+      })
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
@@ -107,13 +109,15 @@ export default function MoviesCard({ movie }) {
 
   return (
     <li className="movies-card">
-      <img
-        className="movies-card__image"
-        src={location.pathname === '/movies'
-          ? `https://api.nomoreparties.co/${movie.image.url}`
-          : movie.image}
-        alt={movie.image.name}
-      />
+      <a href={movie.trailerLink} target="_blank" rel="noreferrer">
+        <img
+          className="movies-card__image"
+          src={location.pathname === '/movies'
+            ? `https://api.nomoreparties.co/${movie.image.url}`
+            : movie.image}
+          alt={movie.image.name}
+        />
+      </a>
       <div className="movies-card__info">
         <h3 className="movies-card__heading movies-card__text">{movie.nameRU}</h3>
         <p className="movies-card__duration movies-card__text">

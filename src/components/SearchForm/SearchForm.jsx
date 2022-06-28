@@ -3,8 +3,8 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import './SearchForm.css';
 
 export default function SearchForm({ handleSearch }) {
-  const [inputValue, setInputValue] = useState('');
-  const [shorts, setShorts] = useState(false);
+  const [inputValue, setInputValue] = useState(localStorage.getItem('query') || '');
+  const [shorts, setShorts] = useState(JSON.parse(localStorage.getItem('shorts')) || false);
 
   const [placeholderContent, setPlaceholderContent] = useState('Фильм');
   const [error, setError] = useState(false);
@@ -31,21 +31,17 @@ export default function SearchForm({ handleSearch }) {
     setPlaceholderContent('Фильм');
 
     localStorage.setItem('query', inputValue);
-    localStorage.setItem('shorts', shorts);
 
     handleSearch(inputValue, shorts);
   };
 
   useEffect(() => {
-    const storedValue = localStorage.getItem('query');
-    const storedShorts = JSON.parse(localStorage.getItem('shorts'));
+    localStorage.setItem('shorts', shorts);
+  }, [shorts]);
 
-    if (storedValue) {
-      setInputValue(storedValue);
-    }
-
-    if (storedShorts) {
-      setShorts(storedShorts);
+  useEffect(() => {
+    if (inputValue) {
+      handleSearch(inputValue, shorts);
     }
   }, []);
 
@@ -68,7 +64,10 @@ export default function SearchForm({ handleSearch }) {
         <button className="search-form__button" type="submit" aria-label="Искать" />
       </div>
       <label className="search-form__checkbox" htmlFor="shorts">
-        <FilterCheckbox value={shorts} handler={handleCheckbox} />
+        <FilterCheckbox
+          value={shorts}
+          onChange={handleCheckbox}
+        />
         <span className="search-form__text">Короткометражки</span>
       </label>
     </form>

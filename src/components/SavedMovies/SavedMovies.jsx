@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import './SavedMovies.css';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
@@ -6,7 +6,6 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
 import Preloader from '../Preloader/Preloader';
 import mainApi from '../../utils/MainApi';
-import UserContext from '../../context/UserContext';
 import searchFilter from '../../utils/searchFilter';
 
 export default function SavedMovies() {
@@ -14,13 +13,13 @@ export default function SavedMovies() {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const { currentUser } = useContext(UserContext);
-
   const handleSearch = (query, isShort) => {
     setLoading(true);
     setErrorMessage('');
 
-    const filtered = searchFilter(movies, query, isShort);
+    const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
+
+    const filtered = searchFilter(savedMovies, query, isShort);
     setMovies(filtered);
 
     if (filtered.length === 0) {
@@ -32,12 +31,13 @@ export default function SavedMovies() {
   useEffect(() => {
     mainApi.getFilms()
       .then((savedMovies) => {
-        setMovies(savedMovies);
         localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+        const user = localStorage.getItem('userId');
 
-        const ownMovies = savedMovies.filter((film) => film.owner === currentUser._id);
+        const ownMovies = savedMovies.filter((film) => film.owner === user);
         setMovies(ownMovies);
-      });
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   return (
