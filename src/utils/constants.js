@@ -3,6 +3,7 @@ export const moviesApiUrl = 'https://api.nomoreparties.co/beatfilm-movies';
 export const namePattern = /^[a-zA-Zа-яА-Я\s-]+$/;
 export const emailPattern = /^[\w]+@[a-zA-Z]+\.[a-zA-Z]{1,3}$/;
 
+export const defaultMessage = 'Упс! Что-то пошло не так...';
 export const noConnectionMessage = 'Нет соединения с сервером';
 export const notFoundMessage = 'Ничего не найдено';
 export const emailExistMessage = 'Email уже зарегистрирован';
