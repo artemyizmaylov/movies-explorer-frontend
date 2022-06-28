@@ -15,6 +15,11 @@ export default function MoviesCardList({ movies, errorMessage }) {
   const setCardsTemplate = () => {
     const width = window.innerWidth;
 
+    if (location.pathname === '/saved-movies') {
+      setMaxMovies(movies.length);
+      return;
+    }
+
     if (width >= 1280) {
       setMaxMovies(12);
       setStep(4);
