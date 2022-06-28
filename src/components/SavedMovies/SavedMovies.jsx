@@ -11,7 +11,7 @@ import TooltipContext from '../../context/TooltipContext';
 import { noConnectionMessage, notFoundMessage } from '../../utils/constants';
 
 export default function SavedMovies() {
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState(JSON.parse(localStorage.getItem('savedMovies')) || []);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -35,11 +35,9 @@ export default function SavedMovies() {
   useEffect(() => {
     mainApi.getFilms()
       .then((savedMovies) => {
-        localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
         const user = localStorage.getItem('userId');
-
         const ownMovies = savedMovies.filter((film) => film.owner === user);
-        setMovies(ownMovies);
+        localStorage.setItem('savedMovies', JSON.stringify(ownMovies));
       })
       .catch(() => setTooltipMessage(noConnectionMessage));
   }, []);
