@@ -37,6 +37,10 @@
   text-align: center;
 }
 
+.profile__message {
+  margin-bottom: 30px;
+}
+
 .profile__info {
   margin: 0;
   padding: 0;

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './Profile.css';
 import { useNavigate } from 'react-router-dom';
 import Header from '../Header/Header';
@@ -10,6 +10,8 @@ export default function Profile() {
   const form = useFormWithValidation();
   const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useContext(UserContext);
+  const [disabled, setDisabled] = useState(true);
+  const [message, setMessage] = useState('');
 
   const handleSignuot = () => {
     mainApi.logout()
@@ -24,14 +26,32 @@ export default function Profile() {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     mainApi.patchUser(form.values)
-      .then((user) => setCurrentUser(user))
-      .then(() => form.resetForm())
-      .catch((err) => console.log(err));
+      .then((user) => {
+        setCurrentUser(user);
+        setMessage('Данные успешно обновлены');
+        form.resetForm();
+      })
+      .catch((err) => {
+        if (err.status === 409) {
+          setMessage('Email уже зарегистрирован');
+        } else {
+          setMessage('Что-то пошло не так...');
+        }
+      });
   };
 
   useEffect(() => {
     form.setValues({ name: currentUser.name, email: currentUser.email });
   }, [currentUser]);
+
+  useEffect(() => {
+    const { name, email } = form.values;
+    if (form.isValid && (currentUser.name !== name || currentUser.email !== email)) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [form]);
 
   return (
     <div className="profile">
@@ -72,12 +92,13 @@ export default function Profile() {
           </div>
         </form>
         <ul className="profile__buttons">
+          <p className="profile__text profile__message">{message}</p>
           <li className="profile__button-item">
             <button
-              className={`profile__button ${!form.isValid && 'profile__button_disabled'} profile__text`}
+              className={`profile__button ${disabled && 'profile__button_disabled'} profile__text`}
               type="submit"
               form="profile"
-              disabled={!form.isValid}
+              disabled={disabled}
             >
               Редактировать
             </button>
