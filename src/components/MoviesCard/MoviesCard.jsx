@@ -26,6 +26,10 @@ export default function MoviesCard({ movie }) {
       newMovie.nameEN = '...';
     }
 
+    if (!newMovie.country) {
+      newMovie.country = '...';
+    }
+
     if (!saved) {
       mainApi.saveFilm({
         ...newMovie,
