@@ -5,6 +5,8 @@ import Header from '../Header/Header';
 import mainApi from '../../utils/MainApi';
 import useFormWithValidation from '../../utils/useFormWithValidation';
 import UserContext from '../../context/UserContext';
+import TooltipContext from '../../context/TooltipContext';
+import { emailExistMessage, noConnectionMessage, successUpdateMessage } from '../../utils/constants';
 
 export default function Profile() {
   const form = useFormWithValidation();
@@ -13,6 +15,8 @@ export default function Profile() {
   const [disabled, setDisabled] = useState(true);
   const [message, setMessage] = useState('');
 
+  const { setTooltipMessage } = useContext(TooltipContext);
+
   const handleSignuot = () => {
     mainApi.logout()
       .then(() => {
@@ -20,7 +24,7 @@ export default function Profile() {
         localStorage.clear();
         navigate('/');
       })
-      .catch((err) => console.log(err));
+      .catch(() => setTooltipMessage(noConnectionMessage));
   };
 
   const handleSubmit = (evt) => {
@@ -28,14 +32,14 @@ export default function Profile() {
     mainApi.patchUser(form.values)
       .then((user) => {
         setCurrentUser(user);
-        setMessage('Данные успешно обновлены');
+        setMessage(successUpdateMessage);
         form.resetForm();
       })
       .catch((err) => {
         if (err.status === 409) {
-          setMessage('Email уже зарегистрирован');
+          setMessage(emailExistMessage);
         } else {
-          setMessage('Что-то пошло не так...');
+          setMessage(noConnectionMessage);
         }
       });
   };

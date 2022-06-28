@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './MoviesCard.css';
 import { useLocation } from 'react-router-dom';
 import mainApi from '../../utils/MainApi';
+import TooltipContext from '../../context/TooltipContext';
+import { noConnectionMessage } from '../../utils/constants';
 
 export default function MoviesCard({ movie }) {
   const [saved, setSaved] = useState(false);
   const [mainId, setMainId] = useState(movie._id);
   const location = useLocation();
+
+  const { setTooltipMessage } = useContext(TooltipContext);
 
   const handleSetSaved = () => {
     if (!saved) {
@@ -49,7 +53,7 @@ export default function MoviesCard({ movie }) {
           savedMovies.push(savedMovie);
           localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
         })
-        .catch((err) => console.log(err));
+        .catch(() => setTooltipMessage(noConnectionMessage));
     } else {
       mainApi.deleteFilm(mainId)
         .then((res) => {
@@ -67,7 +71,7 @@ export default function MoviesCard({ movie }) {
           savedMovies.pop(index);
           localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
         })
-        .catch((err) => console.log(err));
+        .catch(() => setTooltipMessage(noConnectionMessage));
     }
   };
 
@@ -91,7 +95,7 @@ export default function MoviesCard({ movie }) {
         savedMovies.pop(index);
         localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
       })
-      .catch((err) => console.log(err));
+      .catch(() => setTooltipMessage(noConnectionMessage));
   };
 
   useEffect(() => {

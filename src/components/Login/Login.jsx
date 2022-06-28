@@ -26,7 +26,13 @@ export default function Login() {
         setCurrentUser(user);
         navigate('/movies');
       })
-      .catch((err) => err.json().then((data) => setLoginError(data.message)));
+      .catch((err) => {
+        if (err.status === 401) {
+          setLoginError('Неправильные почта или пароль');
+        } else {
+          setLoginError('Нет соединения с сервером');
+        }
+      });
   };
 
   return (

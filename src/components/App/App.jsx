@@ -11,11 +11,18 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 import UserContext from '../../context/UserContext';
 import mainApi from '../../utils/MainApi';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
+import TooltipContext from '../../context/TooltipContext';
+import { noConnectionMessage } from '../../utils/constants';
 
 export default function App() {
   const loggedIn = JSON.parse(localStorage.getItem('loggedIn')) || false;
+
   const [currentUser, setCurrentUser] = useState({});
+  const [tooltipMessage, setTooltipMessage] = useState('');
+
   const userContext = useMemo(() => ({ currentUser, setCurrentUser }), [currentUser]);
+  const tooltipContext = useMemo(() => ({ tooltipMessage, setTooltipMessage }), [tooltipMessage]);
 
   useEffect(() => {
     if (loggedIn) {
@@ -24,37 +31,40 @@ export default function App() {
           localStorage.setItem('userId', user._id);
           setCurrentUser(user);
         })
-        .catch((err) => console.log(err));
+        .catch(() => setTooltipMessage(noConnectionMessage));
     }
   }, []);
 
   return (
     <div className="app">
       <UserContext.Provider value={userContext}>
-        <Routes>
-          <Route exact path="/" element={<Main />} />
-          <Route
-            path="/movies"
-            element={<ProtectedRoute allowed={loggedIn}><Movies /></ProtectedRoute>}
-          />
-          <Route
-            path="/saved-movies"
-            element={<ProtectedRoute allowed={loggedIn}><SavedMovies /></ProtectedRoute>}
-          />
-          <Route
-            path="/profile"
-            element={<ProtectedRoute allowed={loggedIn}><Profile /></ProtectedRoute>}
-          />
-          <Route
-            path="/signup"
-            element={<ProtectedRoute allowed={!loggedIn}><Register /></ProtectedRoute>}
-          />
-          <Route
-            path="/signin"
-            element={<ProtectedRoute allowed={!loggedIn}><Login /></ProtectedRoute>}
-          />
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
+        <TooltipContext.Provider value={tooltipContext}>
+          <InfoTooltip message={tooltipMessage} />
+          <Routes>
+            <Route exact path="/" element={<Main />} />
+            <Route
+              path="/movies"
+              element={<ProtectedRoute allowed={loggedIn}><Movies /></ProtectedRoute>}
+            />
+            <Route
+              path="/saved-movies"
+              element={<ProtectedRoute allowed={loggedIn}><SavedMovies /></ProtectedRoute>}
+            />
+            <Route
+              path="/profile"
+              element={<ProtectedRoute allowed={loggedIn}><Profile /></ProtectedRoute>}
+            />
+            <Route
+              path="/signup"
+              element={<ProtectedRoute allowed={!loggedIn}><Register /></ProtectedRoute>}
+            />
+            <Route
+              path="/signin"
+              element={<ProtectedRoute allowed={!loggedIn}><Login /></ProtectedRoute>}
+            />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        </TooltipContext.Provider>
       </UserContext.Provider>
     </div>
   );

@@ -27,7 +27,13 @@ export default function Register() {
         setCurrentUser(user);
         navigate('/movies');
       })
-      .catch((err) => err.json().then((data) => setRegisterError(data.message)));
+      .catch((err) => {
+        if (err.status === 409) {
+          setRegisterError('Данный email уже зарегистрирован');
+        } else {
+          setRegisterError('Нет соединения с сервером');
+        }
+      });
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './SavedMovies.css';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
@@ -7,11 +7,15 @@ import SearchForm from '../SearchForm/SearchForm';
 import Preloader from '../Preloader/Preloader';
 import mainApi from '../../utils/MainApi';
 import searchFilter from '../../utils/searchFilter';
+import TooltipContext from '../../context/TooltipContext';
+import { noConnectionMessage, notFoundMessage } from '../../utils/constants';
 
 export default function SavedMovies() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+
+  const { setTooltipMessage } = useContext(TooltipContext);
 
   const handleSearch = (query, isShort) => {
     setLoading(true);
@@ -23,7 +27,7 @@ export default function SavedMovies() {
     setMovies(filtered);
 
     if (filtered.length === 0) {
-      setErrorMessage('Ничего не найдено');
+      setErrorMessage(notFoundMessage);
     }
     setLoading(false);
   };
@@ -37,7 +41,7 @@ export default function SavedMovies() {
         const ownMovies = savedMovies.filter((film) => film.owner === user);
         setMovies(ownMovies);
       })
-      .catch((err) => console.log(err));
+      .catch(() => setTooltipMessage(noConnectionMessage));
   }, []);
 
   return (

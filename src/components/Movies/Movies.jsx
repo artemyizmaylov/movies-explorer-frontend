@@ -8,15 +8,12 @@ import Preloader from '../Preloader/Preloader';
 import getFilms from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
 import searchFilter from '../../utils/searchFilter';
+import { moviesMessage, notFoundMessage } from '../../utils/constants';
 
 export default function Movies() {
   const [movies, setMovies] = useState(JSON.parse(localStorage.getItem('movies')) || []);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-
-  const message = `Во время запроса произошла ошибка. 
-  Возможно, проблема с соединением или сервер недоступен.
-  Подождите немного и попробуйте ещё раз`;
 
   const filter = (query, isShort) => {
     const storedMovies = JSON.parse(localStorage.getItem('movies'));
@@ -32,7 +29,7 @@ export default function Movies() {
 
   const handleSearch = (query, isShort) => {
     setLoading(true);
-    setErrorMessage('');
+    setErrorMessage(notFoundMessage);
 
     const storedMovies = JSON.parse(localStorage.getItem('movies'));
 
@@ -42,7 +39,9 @@ export default function Movies() {
           localStorage.setItem('movies', JSON.stringify(films));
           filter(query, isShort);
         })
-        .catch(() => setErrorMessage(message));
+        .catch(() => {
+          setErrorMessage(moviesMessage);
+        });
     } else {
       filter(query, isShort);
     }
@@ -57,7 +56,9 @@ export default function Movies() {
           localStorage.setItem('savedMovies', JSON.stringify(films));
         }
       })
-      .catch((err) => console.log(err));
+      .catch(() => {
+        setErrorMessage(moviesMessage);
+      });
   }, []);
 
   return (
