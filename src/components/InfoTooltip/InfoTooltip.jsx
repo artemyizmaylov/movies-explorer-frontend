@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
-import TooltipContext from '../../context/TooltipContext';
 import './InfoTooltip.css';
+import TooltipContext from '../../context/TooltipContext';
 
 export default function InfoTooltip({ message }) {
   const { setTooltipMessage } = useContext(TooltipContext);

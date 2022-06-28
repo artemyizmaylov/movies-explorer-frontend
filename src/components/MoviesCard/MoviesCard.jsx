@@ -3,7 +3,7 @@ import './MoviesCard.css';
 import { useLocation } from 'react-router-dom';
 import mainApi from '../../utils/MainApi';
 import TooltipContext from '../../context/TooltipContext';
-import { noConnectionMessage } from '../../utils/constants';
+import { defaultMessage, noConnectionMessage } from '../../utils/constants';
 
 export default function MoviesCard({ movie }) {
   const [saved, setSaved] = useState(false);
@@ -22,13 +22,12 @@ export default function MoviesCard({ movie }) {
     delete newMovie.created_at;
     delete newMovie.updated_at;
 
-    if (!newMovie.nameEN) {
-      newMovie.nameEN = '...';
-    }
-
-    if (!newMovie.country) {
-      newMovie.country = '...';
-    }
+    //  Фильтр для заполнения отсутствующих значений в ответе от сервера фильмов
+    Object.entries(newMovie).forEach((key) => {
+      if (!key[1]) {
+        newMovie[key[0]] = '...';
+      }
+    });
 
     if (!saved) {
       mainApi.saveFilm({
@@ -50,7 +49,13 @@ export default function MoviesCard({ movie }) {
           savedMovies.push(savedMovie);
           localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
         })
-        .catch(() => setTooltipMessage(noConnectionMessage));
+        .catch((err) => {
+          if (err.status === 400) {
+            setTooltipMessage(defaultMessage);
+          } else {
+            setTooltipMessage(noConnectionMessage);
+          }
+        });
     } else {
       mainApi.deleteFilm(mainId)
         .then((res) => {
