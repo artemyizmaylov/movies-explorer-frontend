@@ -13,29 +13,22 @@ export default function MoviesCard({ movie }) {
   const { setTooltipMessage } = useContext(TooltipContext);
 
   const handleSetSaved = () => {
-    if (!saved) {
-      const {
-        image,
-        id,
-        director,
-        duration,
-        country,
-        description,
-        nameRU,
-        nameEN,
-        trailerLink,
-        year,
-      } = movie;
+    const newMovie = {};
+    const { image, id } = movie;
 
+    Object.assign(newMovie, movie);
+
+    delete newMovie.id;
+    delete newMovie.created_at;
+    delete newMovie.updated_at;
+
+    if (!newMovie.nameEN) {
+      newMovie.nameEN = '...';
+    }
+
+    if (!saved) {
       mainApi.saveFilm({
-        director,
-        duration,
-        country,
-        description,
-        nameRU,
-        trailerLink,
-        year,
-        nameEN,
+        ...newMovie,
         image: `https://api.nomoreparties.co/${image.url}`,
         thumbnail: `https://api.nomoreparties.co/${image.formats.thumbnail.url}`,
         movieId: id,

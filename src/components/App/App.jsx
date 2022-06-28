@@ -11,8 +11,8 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 import UserContext from '../../context/UserContext';
 import mainApi from '../../utils/MainApi';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import TooltipContext from '../../context/TooltipContext';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import { noConnectionMessage } from '../../utils/constants';
 
 export default function App() {

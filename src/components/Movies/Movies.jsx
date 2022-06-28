@@ -15,21 +15,21 @@ export default function Movies() {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const filter = (query, isShort) => {
+  const filter = (query, shorts) => {
     const storedMovies = JSON.parse(localStorage.getItem('movies'));
+    const filtered = searchFilter(storedMovies, query, shorts);
 
-    const filtered = searchFilter(storedMovies, query, isShort);
     if (filtered.length === 0) {
-      setErrorMessage('Ничего не найдено');
+      setErrorMessage(notFoundMessage);
       return;
     }
 
     setMovies(filtered);
   };
 
-  const handleSearch = (query, isShort) => {
+  const handleSearch = (query, shorts) => {
     setLoading(true);
-    setErrorMessage(notFoundMessage);
+    setErrorMessage('');
 
     const storedMovies = JSON.parse(localStorage.getItem('movies'));
 
@@ -37,13 +37,13 @@ export default function Movies() {
       getFilms()
         .then((films) => {
           localStorage.setItem('movies', JSON.stringify(films));
-          filter(query, isShort);
+          filter(query, shorts);
         })
         .catch(() => {
           setErrorMessage(moviesMessage);
         });
     } else {
-      filter(query, isShort);
+      filter(query, shorts);
     }
 
     setLoading(false);

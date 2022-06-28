@@ -15,6 +15,7 @@ export default function SearchForm({ handleSearch }) {
 
   const handleCheckbox = () => {
     setShorts(!shorts);
+    handleSearch(inputValue, !shorts);
   };
 
   const handleSubmit = (evt) => {
