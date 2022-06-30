@@ -24,6 +24,7 @@ export default function Movies() {
     }
 
     setMovies(filtered);
+    setLoading(false);
   };
 
   const handleSearch = (query, shorts) => {
@@ -44,18 +45,20 @@ export default function Movies() {
     } else {
       filter(query, shorts);
     }
-
-    setLoading(false);
   };
 
   useEffect(() => {
     const savedMovies = localStorage.getItem('savedMovies');
+
     if (!savedMovies) {
+      setLoading(true);
+
       mainApi.getFilms()
         .then((films) => {
           if (films.length > 0) {
             localStorage.setItem('savedMovies', JSON.stringify(films));
           }
+          setLoading(false);
         })
         .catch(() => {
           setErrorMessage(MOVVIES_MESSAGE);

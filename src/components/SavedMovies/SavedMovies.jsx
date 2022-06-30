@@ -34,11 +34,14 @@ export default function SavedMovies() {
   };
 
   useEffect(() => {
+    setLoading(true);
+
     mainApi.getFilms()
       .then((savedMovies) => {
         const user = localStorage.getItem('userId');
         const ownMovies = savedMovies.filter((film) => film.owner === user);
         localStorage.setItem('savedMovies', JSON.stringify(ownMovies));
+        setLoading(false);
       })
       .catch(() => setTooltipMessage(NO_CONNECTION_MESSAGE));
   }, []);
