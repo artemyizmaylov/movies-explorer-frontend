@@ -31,6 +31,9 @@ export default function Profile() {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+
+    setDisabled(true);
+
     mainApi.patchUser(form.values)
       .then((user) => {
         setCurrentUser(user);
@@ -52,12 +55,13 @@ export default function Profile() {
 
   useEffect(() => {
     const { name, email } = form.values;
+
     if (form.isValid && (currentUser.name !== name || currentUser.email !== email)) {
       setDisabled(false);
     } else {
       setDisabled(true);
     }
-  }, [form]);
+  }, [form.values, currentUser]);
 
   return (
     <div className="profile">

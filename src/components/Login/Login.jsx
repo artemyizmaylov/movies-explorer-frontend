@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import useFormWithValidation from '../../utils/useFormWithValidation';
@@ -12,11 +12,14 @@ export default function Login() {
   const form = useFormWithValidation();
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState('');
+  const [disabled, setDisabled] = useState(true);
 
   const { setCurrentUser } = useContext(UserContext);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+
+    setDisabled(true);
 
     mainApi.login(form.values)
       .then(() => mainApi.getUser())
@@ -35,6 +38,10 @@ export default function Login() {
         }
       });
   };
+
+  useEffect(() => {
+    setDisabled(!form.isValid);
+  }, [form.values]);
 
   return (
     <div className="login">
@@ -70,10 +77,10 @@ export default function Login() {
       <div className="login__bottom">
         <p className="login__text login__text_color_red">{loginError}</p>
         <button
-          className={`login__submit-button ${!form.isValid && 'login__submit-button_disabled'} login__text`}
+          className={`login__submit-button ${disabled && 'login__submit-button_disabled'} login__text`}
           type="submit"
           form="login"
-          disabled={!form.isValid}
+          disabled={disabled}
         >
           Войти
         </button>

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import './Register.css';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../Logo/Logo';
@@ -12,11 +12,14 @@ export default function Register() {
   const form = useFormWithValidation();
   const navigate = useNavigate();
   const [registerError, setRegisterError] = useState('');
+  const [disabled, setDisabled] = useState(true);
 
   const { setCurrentUser } = useContext(UserContext);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+
+    setDisabled(true);
 
     mainApi.register(form.values)
       .then((user) => mainApi.login({ email: user.email, password: form.values.password }))
@@ -36,6 +39,10 @@ export default function Register() {
         }
       });
   };
+
+  useEffect(() => {
+    setDisabled(!form.isValid);
+  }, [form.values]);
 
   return (
     <div className="register">
@@ -81,10 +88,10 @@ export default function Register() {
       <div className="register__bottom">
         <p className="register__text register__text_color_red">{registerError}</p>
         <button
-          className={`register__submit-button ${!form.isValid && 'register__submit-button_disabled'} register__text`}
+          className={`register__submit-button ${disabled && 'register__submit-button_disabled'} register__text`}
           type="submit"
           form="register"
-          disabled={!form.isValid}
+          disabled={disabled}
         >
           Зарегистрироваться
         </button>
