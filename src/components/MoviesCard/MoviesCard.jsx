@@ -6,6 +6,7 @@ import TooltipContext from '../../context/TooltipContext';
 import { defaultMessage, noConnectionMessage } from '../../utils/constants';
 
 export default function MoviesCard({ movie }) {
+  const [savedId, setSavedId] = useState('');
   const [saved, setSaved] = useState(false);
   const location = useLocation();
 
@@ -53,7 +54,7 @@ export default function MoviesCard({ movie }) {
           }
         });
     } else {
-      mainApi.deleteFilm(movie._id)
+      mainApi.deleteFilm(savedId)
         .then(() => {
           setSaved(false);
           const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
@@ -82,8 +83,9 @@ export default function MoviesCard({ movie }) {
 
     if (savedMovies) {
       savedMovies.forEach((savedMovie) => {
-        if ((savedMovie.movieId === movie.id) || (savedMovie._id, movie._id)) {
+        if (savedMovie.movieId === movie.id || savedMovie._id === movie._id) {
           setSaved(true);
+          setSavedId(savedMovie._id);
         }
       });
     }
