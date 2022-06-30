@@ -3,7 +3,7 @@ import './MoviesCard.css';
 import { useLocation } from 'react-router-dom';
 import mainApi from '../../utils/MainApi';
 import TooltipContext from '../../context/TooltipContext';
-import { defaultMessage, noConnectionMessage } from '../../utils/constants';
+import { DEFAULT_MESSAGE, NO_CONNECTION_MESSAGE, MINUTS_IN_HOUR } from '../../utils/constants';
 
 export default function MoviesCard({ movie }) {
   const [savedId, setSavedId] = useState('');
@@ -48,9 +48,9 @@ export default function MoviesCard({ movie }) {
         })
         .catch((err) => {
           if (err.status === 400) {
-            setTooltipMessage(defaultMessage);
+            setTooltipMessage(DEFAULT_MESSAGE);
           } else {
-            setTooltipMessage(noConnectionMessage);
+            setTooltipMessage(NO_CONNECTION_MESSAGE);
           }
         });
     } else {
@@ -60,6 +60,7 @@ export default function MoviesCard({ movie }) {
           const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
 
           let index = 0;
+
           for (let i = 0; i < savedMovies.length; i += 1) {
             const film = savedMovies[i];
             if (film._id === movie._id) {
@@ -74,7 +75,7 @@ export default function MoviesCard({ movie }) {
             evt.target.closest('.movies-card').remove();
           }
         })
-        .catch(() => setTooltipMessage(noConnectionMessage));
+        .catch(() => setTooltipMessage(NO_CONNECTION_MESSAGE));
     }
   };
 
@@ -105,7 +106,7 @@ export default function MoviesCard({ movie }) {
       <div className="movies-card__info">
         <h3 className="movies-card__heading movies-card__text">{movie.nameRU}</h3>
         <p className="movies-card__duration movies-card__text">
-          {`${Math.floor(movie.duration / 60)}ч${movie.duration % 60}м`}
+          {`${Math.floor(movie.duration / MINUTS_IN_HOUR)}ч${movie.duration % MINUTS_IN_HOUR}м`}
         </p>
         {location.pathname !== '/saved-movies' ? (
           <button

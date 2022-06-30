@@ -6,6 +6,7 @@ import TextInput from '../TextInput/TextInput';
 import useFormWithValidation from '../../utils/useFormWithValidation';
 import mainApi from '../../utils/MainApi';
 import UserContext from '../../context/UserContext';
+import { CONFLICT_ERROR_CODE } from '../../utils/constants';
 
 export default function Register() {
   const form = useFormWithValidation();
@@ -28,7 +29,7 @@ export default function Register() {
         navigate('/movies');
       })
       .catch((err) => {
-        if (err.status === 409) {
+        if (err.status === CONFLICT_ERROR_CODE) {
           setRegisterError('Данный email уже зарегистрирован');
         } else {
           setRegisterError('Нет соединения с сервером');

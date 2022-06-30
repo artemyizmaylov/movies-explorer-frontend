@@ -8,7 +8,7 @@ import Preloader from '../Preloader/Preloader';
 import mainApi from '../../utils/MainApi';
 import searchFilter from '../../utils/searchFilter';
 import TooltipContext from '../../context/TooltipContext';
-import { noConnectionMessage, notFoundMessage } from '../../utils/constants';
+import { NO_CONNECTION_MESSAGE, NOT_FOUND_MESSAGE } from '../../utils/constants';
 
 export default function SavedMovies() {
   const [movies, setMovies] = useState(JSON.parse(localStorage.getItem('savedMovies')) || []);
@@ -27,7 +27,7 @@ export default function SavedMovies() {
     setMovies(filtered);
 
     if (filtered.length === 0) {
-      setErrorMessage(notFoundMessage);
+      setErrorMessage(NOT_FOUND_MESSAGE);
     }
     setLoading(false);
   };
@@ -39,7 +39,7 @@ export default function SavedMovies() {
         const ownMovies = savedMovies.filter((film) => film.owner === user);
         localStorage.setItem('savedMovies', JSON.stringify(ownMovies));
       })
-      .catch(() => setTooltipMessage(noConnectionMessage));
+      .catch(() => setTooltipMessage(NO_CONNECTION_MESSAGE));
   }, []);
 
   return (

@@ -6,7 +6,9 @@ import mainApi from '../../utils/MainApi';
 import useFormWithValidation from '../../utils/useFormWithValidation';
 import UserContext from '../../context/UserContext';
 import TooltipContext from '../../context/TooltipContext';
-import { emailExistMessage, noConnectionMessage, successUpdateMessage } from '../../utils/constants';
+import {
+  CONFLICT_ERROR_CODE, EMAIL_EXIST_MESSAGE, NO_CONNECTION_MESSAGE, SUCCESS__UPDATE_MESSAGE,
+} from '../../utils/constants';
 
 export default function Profile() {
   const form = useFormWithValidation();
@@ -24,7 +26,7 @@ export default function Profile() {
         localStorage.clear();
         navigate('/');
       })
-      .catch(() => setTooltipMessage(noConnectionMessage));
+      .catch(() => setTooltipMessage(NO_CONNECTION_MESSAGE));
   };
 
   const handleSubmit = (evt) => {
@@ -32,14 +34,14 @@ export default function Profile() {
     mainApi.patchUser(form.values)
       .then((user) => {
         setCurrentUser(user);
-        setMessage(successUpdateMessage);
+        setMessage(SUCCESS__UPDATE_MESSAGE);
         form.resetForm();
       })
       .catch((err) => {
-        if (err.status === 409) {
-          setMessage(emailExistMessage);
+        if (err.status === CONFLICT_ERROR_CODE) {
+          setMessage(EMAIL_EXIST_MESSAGE);
         } else {
-          setMessage(noConnectionMessage);
+          setMessage(NO_CONNECTION_MESSAGE);
         }
       });
   };

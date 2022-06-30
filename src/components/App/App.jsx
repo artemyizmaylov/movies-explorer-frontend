@@ -13,7 +13,7 @@ import mainApi from '../../utils/MainApi';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import TooltipContext from '../../context/TooltipContext';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
-import { noConnectionMessage } from '../../utils/constants';
+import { NO_CONNECTION_MESSAGE } from '../../utils/constants';
 
 export default function App() {
   const loggedIn = JSON.parse(localStorage.getItem('loggedIn')) || false;
@@ -31,7 +31,7 @@ export default function App() {
           localStorage.setItem('userId', user._id);
           setCurrentUser(user);
         })
-        .catch(() => setTooltipMessage(noConnectionMessage));
+        .catch(() => setTooltipMessage(NO_CONNECTION_MESSAGE));
     }
   }, []);
 

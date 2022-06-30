@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import './InfoTooltip.css';
 import TooltipContext from '../../context/TooltipContext';
+import { TOOLTIP_SHOWN_DURATION_MS } from '../../utils/constants';
 
 export default function InfoTooltip({ message }) {
   const { setTooltipMessage } = useContext(TooltipContext);
@@ -8,7 +9,7 @@ export default function InfoTooltip({ message }) {
   useEffect(() => {
     setTimeout(() => {
       setTooltipMessage('');
-    }, 5000);
+    }, TOOLTIP_SHOWN_DURATION_MS);
   });
 
   return (

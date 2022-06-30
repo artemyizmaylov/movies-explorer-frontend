@@ -3,13 +3,13 @@ import './MoviesCardList.css';
 import { useLocation } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import {
-  maxMovies1280,
-  maxMovies630,
-  maxMovies990,
-  maxMoviesDefault,
-  maxMoviesStep1280,
-  maxMoviesStep990,
-  maxMoviesStepDefault,
+  MAX_MOVIES_1280,
+  MAX_MOVIES_630,
+  MAX_MOVIES_990,
+  MAX_MOVIES_DEFAULT,
+  MAX_MOVIES_STEP_1280,
+  MAX_MOVIES_STEP_990,
+  MAX_MOVIES_STEP_DEFAULT,
 } from '../../utils/constants';
 
 export default function MoviesCardList({ movies, errorMessage }) {
@@ -29,17 +29,17 @@ export default function MoviesCardList({ movies, errorMessage }) {
     }
 
     if (width >= 1280) {
-      setMaxMovies(maxMovies1280);
-      setStep(maxMoviesStep1280);
+      setMaxMovies(MAX_MOVIES_1280);
+      setStep(MAX_MOVIES_STEP_1280);
     } else if (width >= 990) {
-      setMaxMovies(maxMovies990);
-      setStep(maxMoviesStep990);
+      setMaxMovies(MAX_MOVIES_990);
+      setStep(MAX_MOVIES_STEP_990);
     } else if (width >= 630) {
-      setMaxMovies(maxMovies630);
-      setStep(maxMoviesStepDefault);
+      setMaxMovies(MAX_MOVIES_630);
+      setStep(MAX_MOVIES_STEP_DEFAULT);
     } else {
-      setMaxMovies(maxMoviesDefault);
-      setStep(maxMoviesStepDefault);
+      setMaxMovies(MAX_MOVIES_DEFAULT);
+      setStep(MAX_MOVIES_STEP_DEFAULT);
     }
   };
 

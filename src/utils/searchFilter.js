@@ -1,3 +1,5 @@
+import { MAX_SHORTS_DURATION } from './constants';
+
 export default function searchFilter(array, query, short) {
   if (array.length === 0 || !array) {
     return [];
@@ -8,7 +10,7 @@ export default function searchFilter(array, query, short) {
     .includes(query.toLowerCase()));
 
   if (short) {
-    return filtered.filter((element) => element.duration <= 40);
+    return filtered.filter((element) => element.duration <= MAX_SHORTS_DURATION);
   }
 
   return filtered;

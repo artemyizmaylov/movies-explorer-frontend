@@ -8,7 +8,7 @@ import Preloader from '../Preloader/Preloader';
 import getFilms from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
 import searchFilter from '../../utils/searchFilter';
-import { moviesMessage, notFoundMessage } from '../../utils/constants';
+import { MOVVIES_MESSAGE, NOT_FOUND_MESSAGE } from '../../utils/constants';
 
 export default function Movies() {
   const [movies, setMovies] = useState(JSON.parse(localStorage.getItem('movies')) || []);
@@ -20,7 +20,7 @@ export default function Movies() {
     const filtered = searchFilter(storedMovies, query, shorts);
 
     if (filtered.length === 0) {
-      setErrorMessage(notFoundMessage);
+      setErrorMessage(NOT_FOUND_MESSAGE);
       return;
     }
 
@@ -40,7 +40,7 @@ export default function Movies() {
           filter(query, shorts);
         })
         .catch(() => {
-          setErrorMessage(moviesMessage);
+          setErrorMessage(MOVVIES_MESSAGE);
         });
     } else {
       filter(query, shorts);
@@ -57,7 +57,7 @@ export default function Movies() {
         }
       })
       .catch(() => {
-        setErrorMessage(moviesMessage);
+        setErrorMessage(MOVVIES_MESSAGE);
       });
   }, []);
 

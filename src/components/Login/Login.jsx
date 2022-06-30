@@ -6,6 +6,7 @@ import Logo from '../Logo/Logo';
 import TextInput from '../TextInput/TextInput';
 import mainApi from '../../utils/MainApi';
 import UserContext from '../../context/UserContext';
+import { UNAUTH_ERROR_CODE } from '../../utils/constants';
 
 export default function Login() {
   const form = useFormWithValidation();
@@ -27,7 +28,7 @@ export default function Login() {
         navigate('/movies');
       })
       .catch((err) => {
-        if (err.status === 401) {
+        if (err.status === UNAUTH_ERROR_CODE) {
           setLoginError('Неправильные почта или пароль');
         } else {
           setLoginError('Нет соединения с сервером');
