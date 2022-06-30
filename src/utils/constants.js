@@ -1,5 +1,4 @@
-export const MAIN_API_URL = 'http://localhost:3000';
-// export const MAIN_API_URL = 'https://api.favorite-movies.nomoredomains.xyz';
+export const MAIN_API_URL = 'https://api.favorite-movies.nomoredomains.xyz';
 export const MOVIES_API_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 
 export const DEFAULT_MESSAGE = 'Упс! Что-то пошло не так...';
