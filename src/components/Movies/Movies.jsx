@@ -11,7 +11,7 @@ import searchFilter from '../../utils/searchFilter';
 import { MOVVIES_MESSAGE, NOT_FOUND_MESSAGE } from '../../utils/constants';
 
 export default function Movies() {
-  const [movies, setMovies] = useState(JSON.parse(localStorage.getItem('movies')) || []);
+  const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 

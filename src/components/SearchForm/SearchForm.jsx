@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import './SearchForm.css';
 
 export default function SearchForm({ handleSearch }) {
-  const [inputValue, setInputValue] = useState(localStorage.getItem('query') || '');
-  const [shorts, setShorts] = useState(JSON.parse(localStorage.getItem('shorts')) || false);
+  const [inputValue, setInputValue] = useState('');
+  const [shorts, setShorts] = useState(false);
 
   const [placeholderContent, setPlaceholderContent] = useState('Фильм');
   const [error, setError] = useState(false);
+
+  const { pathname } = useLocation();
 
   const handleInput = (evt) => {
     setInputValue(evt.target.value);
@@ -15,6 +18,7 @@ export default function SearchForm({ handleSearch }) {
 
   const handleCheckbox = () => {
     setShorts(!shorts);
+    localStorage.setItem('shorts', !shorts);
     handleSearch(inputValue, !shorts);
   };
 
@@ -37,12 +41,21 @@ export default function SearchForm({ handleSearch }) {
   };
 
   useEffect(() => {
-    localStorage.setItem('shorts', shorts);
-  }, [shorts]);
+    if (pathname === '/movies') {
+      const savedInputValue = localStorage.getItem('query');
+      const savedShorts = JSON.parse(localStorage.getItem('shorts'));
 
-  useEffect(() => {
-    if (inputValue) {
-      handleSearch(inputValue, shorts);
+      if (savedInputValue) {
+        setInputValue(savedInputValue);
+      }
+
+      if (savedShorts) {
+        setShorts(savedShorts);
+      }
+
+      if (savedInputValue || (savedShorts === true)) {
+        handleSearch(savedInputValue, savedShorts);
+      }
     }
   }, []);
 
