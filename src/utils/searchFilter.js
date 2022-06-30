@@ -1,6 +1,6 @@
 export default function searchFilter(array, query, short) {
-  if (array.length === 0) {
-    return array;
+  if (array.length === 0 || !array) {
+    return [];
   }
 
   const filtered = array.filter((element) => element.nameRU
