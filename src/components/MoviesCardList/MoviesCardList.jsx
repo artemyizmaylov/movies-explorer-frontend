@@ -2,6 +2,15 @@ import React, { useEffect, useState } from 'react';
 import './MoviesCardList.css';
 import { useLocation } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoviesCard';
+import {
+  maxMovies1280,
+  maxMovies630,
+  maxMovies990,
+  maxMoviesDefault,
+  maxMoviesStep1280,
+  maxMoviesStep990,
+  maxMoviesStepDefault,
+} from '../../utils/constants';
 
 export default function MoviesCardList({ movies, errorMessage }) {
   const [maxMovies, setMaxMovies] = useState(0);
@@ -17,21 +26,20 @@ export default function MoviesCardList({ movies, errorMessage }) {
 
     if (location.pathname === '/saved-movies') {
       setMaxMovies(movies.length);
-      return;
     }
 
     if (width >= 1280) {
-      setMaxMovies(12);
-      setStep(4);
+      setMaxMovies(maxMovies1280);
+      setStep(maxMoviesStep1280);
     } else if (width >= 990) {
-      setMaxMovies(9);
-      setStep(3);
+      setMaxMovies(maxMovies990);
+      setStep(maxMoviesStep990);
     } else if (width >= 630) {
-      setMaxMovies(8);
-      setStep(2);
+      setMaxMovies(maxMovies630);
+      setStep(maxMoviesStepDefault);
     } else {
-      setMaxMovies(5);
-      setStep(2);
+      setMaxMovies(maxMoviesDefault);
+      setStep(maxMoviesStepDefault);
     }
   };
 
