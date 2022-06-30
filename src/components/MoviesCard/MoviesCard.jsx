@@ -29,6 +29,7 @@ export default function MoviesCard({ movie }) {
           newMovie[key[0]] = '...';
         }
       });
+
       mainApi.saveFilm({
         ...newMovie,
         image: `https://api.nomoreparties.co/${image.url}`,
@@ -37,6 +38,8 @@ export default function MoviesCard({ movie }) {
       })
         .then((savedMovie) => {
           setSaved(true);
+          setSavedId(savedMovie._id);
+
           let savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
 
           if (!savedMovies) {
@@ -59,8 +62,8 @@ export default function MoviesCard({ movie }) {
           setSaved(false);
           const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
 
+          // Поиск и удаление сохраненного фильма из массива в localStorage
           let index = 0;
-
           for (let i = 0; i < savedMovies.length; i += 1) {
             const film = savedMovies[i];
             if (film._id === movie._id) {
