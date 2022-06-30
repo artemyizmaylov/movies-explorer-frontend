@@ -21,7 +21,6 @@ export default function Movies() {
 
     if (filtered.length === 0) {
       setErrorMessage(NOT_FOUND_MESSAGE);
-      return;
     }
 
     setMovies(filtered);
@@ -50,15 +49,18 @@ export default function Movies() {
   };
 
   useEffect(() => {
-    mainApi.getFilms()
-      .then((films) => {
-        if (films.length > 0) {
-          localStorage.setItem('savedMovies', JSON.stringify(films));
-        }
-      })
-      .catch(() => {
-        setErrorMessage(MOVVIES_MESSAGE);
-      });
+    const savedMovies = localStorage.getItem('savedMovies');
+    if (!savedMovies) {
+      mainApi.getFilms()
+        .then((films) => {
+          if (films.length > 0) {
+            localStorage.setItem('savedMovies', JSON.stringify(films));
+          }
+        })
+        .catch(() => {
+          setErrorMessage(MOVVIES_MESSAGE);
+        });
+    }
   }, []);
 
   return (

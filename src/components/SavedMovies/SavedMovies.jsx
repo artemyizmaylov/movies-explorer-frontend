@@ -24,11 +24,12 @@ export default function SavedMovies() {
     const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
 
     const filtered = searchFilter(savedMovies, query, isShort);
-    setMovies(filtered);
 
     if (filtered.length === 0) {
       setErrorMessage(NOT_FOUND_MESSAGE);
     }
+
+    setMovies(filtered);
     setLoading(false);
   };
 
