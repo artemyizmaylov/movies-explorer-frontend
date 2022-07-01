@@ -20,6 +20,10 @@
   color: #8b8b8b;
 }
 
+.login__text_color_red {
+  color: #ee3465;
+}
+
 .login__heading {
   font-weight: 500;
   font-size: 24px;
@@ -39,6 +43,11 @@
 
 .login__submit-button:hover {
   opacity: 60%;
+}
+
+.login__submit-button_disabled {
+  opacity: 60%;
+  background-color: #4286f435;
 }
 
 .login__link {
@@ -72,6 +81,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  align-items: center;
 }
 
 @media (max-width: 768px) {

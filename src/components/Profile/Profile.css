@@ -37,6 +37,10 @@
   text-align: center;
 }
 
+.profile__message {
+  margin-bottom: 30px;
+}
+
 .profile__info {
   margin: 0;
   padding: 0;
@@ -53,6 +57,12 @@
 .profile__info-item:last-of-type {
   border: none;
   margin: 0;
+}
+
+.profile__input {
+  background: none;
+  border: none;
+  text-align: right;
 }
 
 .profile__buttons {
@@ -74,6 +84,10 @@
   line-height: 16px;
   cursor: pointer;
   transition: 0.2s;
+}
+
+.profile__button_disabled {
+  opacity: 60%;
 }
 
 .profile__button:hover {

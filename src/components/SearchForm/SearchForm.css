@@ -34,6 +34,7 @@
   background-position: center;
   background-size: 15px;
   background-repeat: no-repeat;
+  cursor: pointer;
 }
 
 .search-form__text {
@@ -58,6 +59,10 @@
 
 .search-form__input::placeholder {
   color: #8b8b8b;
+}
+
+.search-form__input_error::placeholder {
+  color: #ee3465;
 }
 
 .search-form__checkbox {

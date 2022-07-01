@@ -3,7 +3,6 @@
   height: 100%;
   display: grid;
   grid-template-rows: 1fr min-content;
-  grid-auto-rows: minmax(min-content, max-content);
   box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
   background: #222222;
@@ -16,13 +15,13 @@
   grid-template-areas:
     "heading button"
     "duration button";
-  row-gap: 10px;
+  gap: 10px;
   padding: 14px 12px;
 }
 
 .movies-card__image {
   width: 100%;
-  height: 100%;
+  height: 151px;
   object-fit: cover;
 }
 
@@ -41,6 +40,9 @@
   line-height: 16px;
   color: #ffffff;
   grid-area: heading;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .movies-card__duration {
@@ -71,4 +73,16 @@
 .movies-card__delete-button {
   background-image: url("../../images/x-button.svg");
   background-size: contain;
+}
+
+@media (max-width: 768px) {
+  .movies-card__image {
+    height: 190px;
+  }
+}
+
+@media (max-width: 414px) {
+  .movies-card__image {
+    height: 168px;
+  }
 }
